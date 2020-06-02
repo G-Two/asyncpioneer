@@ -58,6 +58,7 @@ CONF_ZONES = "zones"
 SOURCE_ID_PHONO         = "00"
 SOURCE_ID_CD            = "01"
 SOURCE_ID_TUNER         = "02"
+SOURCE_ID_CDR           = "03"
 SOURCE_ID_DVD           = "04"
 SOURCE_ID_TV            = "05"
 SOURCE_ID_SAT           = "06"
@@ -146,6 +147,11 @@ DEFAULT_SOURCES = [SOURCE_ID_BD, SOURCE_ID_DVD, SOURCE_ID_SAT,
     SOURCE_ID_HDMI5, SOURCE_ID_HDMI6, SOURCE_ID_INTERNET, SOURCE_ID_MEDIA_SERVER,
     SOURCE_ID_FAVORITES, SOURCE_ID_IPOD, SOURCE_ID_TV, SOURCE_ID_CD,
     SOURCE_ID_TUNER,SOURCE_ID_BT_AUDIO]
+
+DEFAULT_SOURCES_LEGACY = [SOURCE_ID_BD, SOURCE_ID_CDR, SOURCE_ID_DVD,
+    SOURCE_ID_HDMI1, SOURCE_ID_HDMI2, SOURCE_ID_HDMI3, SOURCE_ID_HDMI4,
+    SOURCE_ID_HDMI5, SOURCE_ID_IPOD, SOURCE_ID_TV, SOURCE_ID_CD,
+    SOURCE_ID_TUNER, SOURCE_ID_BT_AUDIO]
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -469,7 +475,7 @@ class PioneerDevice(MediaPlayerEntity):
         _LOGGER.debug(f"{self._zone} Get Names")
         self.telnet_command("?RGD")
         hasNames = True
-        for source in DEFAULT_SOURCES:
+        for source in DEFAULT_SOURCES_LEGACY:
             if self._zone == "Zone2":
                 if source not in VALID_ZONE2_SOURCES:
                     continue
